@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>reset-email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<form #form="ngForm" (ngSubmit)="reset_email(form)" method="PUT">
+  <p>
+      Please enter your new email
+  </p>
+<ion-item>
+<ion-label position="floating">email</ion-label>
+<ion-input type="email" ngModel name="email"></ion-input>
+</ion-item>
+<!-- 
+<ion-item>
+<ion-label position="floating">email_new</ion-label>
+<ion-input type="email" ngModel name="email_new"></ion-input>
+</ion-item> -->
+
+<ion-button type="submit" expand="full" color="primary">Send</ion-button>
+</form>
+
+<ion-content>
+</ion-content>

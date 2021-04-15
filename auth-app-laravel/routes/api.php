@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
+// use App\Http\Controllers\Auth\EmailChangeController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::group([
         Route::get('user', [AuthController::class, 'user']);
     });
 });
+// Route::put('userUpdate', [PasswordResetController::class, 'userUpdate']);
+
 Route::group([    
     'namespace' => 'Auth',    
     'middleware' => 'api',    
@@ -33,6 +36,8 @@ Route::group([
 ], function () {
     Route::post('create', [PasswordResetController::class, 'create']);
     Route::get('find/{token}', [PasswordResetController::class, 'find']);
-    Route::patch('reset', [PasswordResetController::class, 'reset']);
-    Route::post('profile', [PasswordResetController::class, 'profile']);
+    // Route::post('reset', [PasswordResetController::class, 'reset']);
 });
+
+Route::post('update', [AuthController::class, 'update']);
+?>

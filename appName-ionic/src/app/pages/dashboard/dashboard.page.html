@@ -11,23 +11,7 @@
   <div *ngIf="user != undefined">
       Welcome {{ user["first_name"]  }} {{ user["last_name"]  }}
   </div>
+  <ion-button [routerLink]="['/reset-email']">profile</ion-button>
+
 </ion-content>
 
-<ion-content>
-  <form #form="ngForm" (ngSubmit)="reset_email(form)" method="post">
-        <p>
-            Please enter your new email
-        </p>
-    <ion-item>
-      <ion-label position="floating">email</ion-label>
-      <ion-input type="email" ngModel name="email"></ion-input>
-    </ion-item>
-
-    <!-- <ion-item>
-      <ion-label position="floating">name</ion-label>
-      <ion-input type="email" ngModel name="new_name"></ion-input>
-    </ion-item> -->
-
-    <ion-button type="submit" expand="full" color="primary">Send</ion-button>
-    </form>
-  </ion-content>

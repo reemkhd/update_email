@@ -39,20 +39,5 @@ export class DashboardPage implements OnInit {
       }
     );
   }
-  reset_email(form: NgForm) {
-    // , form.value.new_name
-    this.authService.reset_email(form.value.email).subscribe(
-      data => {
-        this.alertService.presentToast("Your email reset");
-      },
-      error => {
-        console.log(error);
-        this.alertService.presentToast("error")
-      },
-      () => {
-        this.dismissReset();
-        this.navCtrl.navigateRoot('/dashboard');
-      }
-    );
-  }
+
 }

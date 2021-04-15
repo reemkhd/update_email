@@ -22,6 +22,9 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\Cors::class,
+        \Illuminate\Session\Middleware\AuthenticateSession::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+
     ];
 
     /**

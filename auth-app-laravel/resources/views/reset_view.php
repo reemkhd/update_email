@@ -3,13 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{!! csrf_token() !!}" />
     </head>
 
     <body >
-        <form method="PATCH" action="{{ route('reset') }}">
+        <!-- <form method="POST" action="/reset"> -->
+        <form method="post" action="{{ route('reset') }}">
+            @csrf
             <p>
-                Please enter your new password
+                Please enter your email and new password
             </p>
+            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <item>
                 <label position="floating">Email</label>
                 <input type="email" name="email"></input>

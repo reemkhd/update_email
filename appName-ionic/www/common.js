@@ -85,8 +85,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var _register_register_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../register/register.page */ "SixS");
-/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/auth.service */ "lGQG");
-/* harmony import */ var src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/alert.service */ "3LUQ");
+/* harmony import */ var _reset_reset_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reset/reset.page */ "WE4C");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/auth.service */ "lGQG");
+/* harmony import */ var src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/alert.service */ "3LUQ");
+
 
 
 
@@ -128,12 +130,20 @@ let LoginPage = class LoginPage {
             this.navCtrl.navigateRoot('/dashboard');
         });
     }
+    showForgetPassword() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const forgetModal = yield this.modalController.create({
+                component: _reset_reset_page__WEBPACK_IMPORTED_MODULE_6__["ResetPage"],
+            });
+            return yield forgetModal.present();
+        });
+    }
 };
 LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
-    { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
+    { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["AuthService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
-    { type: src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_7__["AlertService"] }
+    { type: src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_8__["AlertService"] }
 ];
 LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -201,7 +211,6 @@ let RegisterPage = class RegisterPage {
             this.authService.login(form.value.email, form.value.password).subscribe(data => {
             }, error => {
                 console.log(error);
-                console.log("error in reg");
             }, () => {
                 this.dismissRegister();
                 this.navCtrl.navigateRoot('/dashboard');
@@ -209,7 +218,6 @@ let RegisterPage = class RegisterPage {
             this.alertService.presentToast(data['message']);
         }, error => {
             console.log(error);
-            //console.log("error in reg 2");
         }, () => {
         });
     }
@@ -227,6 +235,81 @@ RegisterPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [_register_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
 ], RegisterPage);
+
+
+
+/***/ }),
+
+/***/ "UFpu":
+/*!**************************************************!*\
+  !*** ./src/app/pages/auth/reset/reset.page.scss ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyZXNldC5wYWdlLnNjc3MifQ== */");
+
+/***/ }),
+
+/***/ "WE4C":
+/*!************************************************!*\
+  !*** ./src/app/pages/auth/reset/reset.page.ts ***!
+  \************************************************/
+/*! exports provided: ResetPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPage", function() { return ResetPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_reset_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./reset.page.html */ "zRgQ");
+/* harmony import */ var _reset_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reset.page.scss */ "UFpu");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/alert.service */ "3LUQ");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/auth.service */ "lGQG");
+
+
+
+
+
+
+
+let ResetPage = class ResetPage {
+    constructor(modalController, alertService, authService) {
+        this.modalController = modalController;
+        this.alertService = alertService;
+        this.authService = authService;
+    }
+    ngOnInit() {
+    }
+    // Dismiss Login Modal
+    dismissReset() {
+        this.modalController.dismiss();
+    }
+    reset(form) {
+        this.authService.reset(form.value.email).subscribe(data => {
+            this.alertService.presentToast("Send password link");
+        }, error => {
+            console.log(error);
+            this.alertService.presentToast("error");
+        });
+    }
+};
+ResetPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
+    { type: src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
+    { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] }
+];
+ResetPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-reset',
+        template: _raw_loader_reset_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_reset_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], ResetPage);
 
 
 
@@ -646,7 +729,20 @@ const hapticImpact = (options) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-button color=\"light\" (click)=\"dismissLogin()\">Close</ion-button>\n    <ion-title>Login</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" method=\"post\">\n    <ion-item>\n      <ion-label position=\"floating\">Email</ion-label>\n      <ion-input ngModel type=\"email\" name=\"email\"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label position=\"floating\">Password</ion-label>\n      <ion-input ngModel type=\"password\" name=\"password\"></ion-input>\n    </ion-item>\n  \n    <p text-right>Forgot Password?</p>\n  \n    <ion-button type=\"submit\" expand=\"full\" color=\"primary\">Login</ion-button>\n  </form>\n\n  <p text-center>Don't have a account?</p>\n  <ion-button expand=\"full\" color=\"danger\" (click)=\"registerModal()\">Register</ion-button>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-button color=\"light\" (click)=\"dismissLogin()\">Close</ion-button>\n    <ion-title>Login</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" method=\"post\">\n    <ion-item>\n      <ion-label position=\"floating\">Email</ion-label>\n      <ion-input ngModel type=\"email\" name=\"email\"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label position=\"floating\">Password</ion-label>\n      <ion-input ngModel type=\"password\" name=\"password\"></ion-input>\n    </ion-item>\n  \n    <ion-button (click)=\"showForgetPassword()\"> Forgot Password? </ion-button>\n  \n    <ion-button type=\"submit\" expand=\"full\" color=\"primary\">Login</ion-button>\n  </form>\n\n  <p text-center>Don't have a account?</p>\n  <ion-button expand=\"full\" color=\"danger\" (click)=\"registerModal()\">Register</ion-button>\n</ion-content>");
+
+/***/ }),
+
+/***/ "zRgQ":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/auth/reset/reset.page.html ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-toolbar>\n  <h1 class=\"title\">Reset your Password</h1>\n</ion-toolbar>\n<ion-content>\n<form #form=\"ngForm\" (ngSubmit)=\"reset(form)\" method=\"post\">\n      <p>\n          Please enter your email associated to this account !\n      </p>\n  <ion-item>\n    <ion-label position=\"floating\">Email</ion-label>\n    <ion-input type=\"email\" ngModel name=\"email\"></ion-input>\n  </ion-item>\n\n  <ion-button type=\"submit\" expand=\"full\" color=\"primary\">Send</ion-button>\n  </form>\n</ion-content>");
 
 /***/ })
 

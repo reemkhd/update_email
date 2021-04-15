@@ -99,10 +99,11 @@ export class AuthService {
       {email: email, password: password}
     )
   }
-  reset_email(email: String) {
+
+  reset_email(email: String, id: any) {
     // , name: String
-    return this.http.post(this.env.API_URL + 'auth/profile',
-    {email: email}
+    return this.http.post(this.env.API_URL + 'update',
+      {email: email, id: id}
     // , name: name
     )
   }

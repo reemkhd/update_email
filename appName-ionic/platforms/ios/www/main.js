@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/reem/Sites/appName/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! /Users/reem/Desktop/Zad/register-login-work-copy-controller-error/appName-ionic/src/main.ts */"zUnb");
 
 
 /***/ }),
@@ -616,15 +616,17 @@ let AuthService = class AuthService {
             return data;
         }));
     }
-    user() {
-        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-            'Authorization': this.token["token_type"] + " " + this.token["access_token"]
-        });
-        return this.http.get(this.env.API_URL + 'auth/user', { headers: headers })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(user => {
-            return user;
-        }));
-    }
+    // user() {
+    //   const headers = new HttpHeaders({
+    //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    //   });
+    //   return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+    //   .pipe(
+    //     tap(user => {
+    //       return user;
+    //     })
+    //   )
+    // }
     getToken() {
         return this.storage.getItem('token').then(data => {
             this.token = data;
@@ -638,6 +640,28 @@ let AuthService = class AuthService {
             this.token = null;
             this.isLoggedIn = false;
         });
+    }
+    reset(email) {
+        return this.http.post(this.env.API_URL + 'password/create', { email: email });
+    }
+    find_pass() {
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Authorization': this.token["token_type"] + " " + this.token["access_token"]
+        });
+        console.log('Token is: ', this.token);
+        return this.http.get(this.env.API_URL + 'password/find/' + this.token, { headers: headers });
+    }
+    create_reset(email, password) {
+        return this.http.patch(this.env.API_URL + 'password/reset', { email: email, password: password });
+    }
+    reset_email(email) {
+        // , name: String
+        const headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Authorization': this.token["token_type"] + " " + this.token["access_token"]
+        });
+        return this.http.post(this.env.API_URL + 'auth/user', { email: email }, { headers: headers }
+        // , name: name
+        );
     }
 };
 AuthService.ctorParameters = () => [
@@ -699,8 +723,28 @@ const routes = [
         path: 'dashboard',
         loadChildren: () => __webpack_require__.e(/*! import() | pages-dashboard-dashboard-module */ "pages-dashboard-dashboard-module").then(__webpack_require__.bind(null, /*! ./pages/dashboard/dashboard.module */ "/2RN")).then(m => m.DashboardPageModule)
     },
-    { path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]] },
-    { path: 'list', loadChildren: './list/list.module#ListPageModule', canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]] },
+    {
+        path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
+    },
+    {
+        path: 'list', loadChildren: './list/list.module#ListPageModule', canActivate: [_guard_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
+    },
+    {
+        path: 'reset',
+        loadChildren: () => Promise.all(/*! import() | pages-auth-reset-reset-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-auth-reset-reset-module")]).then(__webpack_require__.bind(null, /*! ./pages/auth/reset/reset.module */ "/pvJ")).then(m => m.ResetPageModule)
+    },
+    {
+        path: 'new-pass',
+        loadChildren: () => __webpack_require__.e(/*! import() | pages-auth-new-pass-new-pass-module */ "pages-auth-new-pass-new-pass-module").then(__webpack_require__.bind(null, /*! ./pages/auth/new-pass/new-pass.module */ "0CYj")).then(m => m.NewPassPageModule)
+    },
+    {
+        path: 'profile',
+        loadChildren: () => __webpack_require__.e(/*! import() | pages-auth-profile-profile-module */ "pages-auth-profile-profile-module").then(__webpack_require__.bind(null, /*! ./pages/auth/profile/profile.module */ "NTAT")).then(m => m.ProfilePageModule)
+    },
+    {
+        path: 'reset-email',
+        loadChildren: () => __webpack_require__.e(/*! import() | pages-reset-email-reset-email-module */ "pages-reset-email-reset-email-module").then(__webpack_require__.bind(null, /*! ./pages/reset-email/reset-email.module */ "fLtV")).then(m => m.ResetEmailPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

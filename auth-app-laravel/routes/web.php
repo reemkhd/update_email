@@ -16,6 +16,8 @@ use App\Http\Controllers\Auth\PasswordResetController;
 
 Route::get('/', function () {return view('welcome');});
 // Route::get('find/{token}', [PasswordResetController::class, 'find']);
-// Route::patch('reset', [PasswordResetController::class, 'reset']);
+Route::post('reset', [PasswordResetController::class, 'reset']);
 // Route::post('/home','HomeController@profileUpdate')->name('profileupdate');
 // Route::post('profile', [PasswordResetController::class, 'profile']);
+// Route::put('profile', [PasswordResetController::class, 'profile']);
+?>

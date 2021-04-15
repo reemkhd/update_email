@@ -23,9 +23,5 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  // Dismiss Modal
-  dismissReset() {
-    this.modalController.dismiss();
-  }
 
 }

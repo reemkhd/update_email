@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/auth/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'reset-email',
+    loadChildren: () => import('./pages/reset-email/reset-email.module').then( m => m.ResetEmailPageModule)
+  },
   
 ];
 

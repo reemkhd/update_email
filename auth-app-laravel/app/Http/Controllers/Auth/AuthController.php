@@ -7,9 +7,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Log;
+use DB;
 
 class AuthController extends Controller
 {
+    protected $id;
     public function login(Request $request) {
         $request->validate([
             'email' => 'required|string|email',
@@ -73,6 +76,26 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
+        // $request->validate([
+        //     'email' => 'required|string|email',
+        // ]);
+        // $id = $request->user()->id;
+        // $useremail = DB::table('users')
+        //         ->where('id', $id )
+        //         ->update(['email' => $request->email]);
         return response()->json($request->user());
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+        ]);
+        $id = $request->id['id'];
+        Log::info($id);
+        $useremail = DB::table('users')
+                ->where('id', $id)
+                ->update(['email' => $request->email]);
+        return response()->json($this->id);
     }
 }
